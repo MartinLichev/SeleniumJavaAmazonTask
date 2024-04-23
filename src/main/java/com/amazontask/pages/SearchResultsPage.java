@@ -53,7 +53,39 @@ public class SearchResultsPage {
         return customerReviewsCount.getText();
     }
 
-    // More methods can be added to perform further checks like availability, delivery options, etc.
+    public boolean isAuthorCorrect(String expectedAuthor) {
+        wait.until(ExpectedConditions.visibilityOf(authorLink));
+        return authorLink.getText().contains(expectedAuthor);
+    }
 
-    // ... other methods as per your test scenarios
+    public String getDeliveryDateText() {
+        wait.until(ExpectedConditions.visibilityOf(deliveryInfo));
+        return deliveryInfo.getText();
+    }
+
+    public String getUsedNewOfferPriceText() {
+        wait.until(ExpectedConditions.visibilityOf(usedNewOfferPrice));
+        return usedNewOfferPrice.getText();
+    }
+
+    public boolean isEditionFormatAvailable(String format) {
+        wait.until(ExpectedConditions.visibilityOf(editionFormats));
+        return editionFormats.getText().contains(format);
+    }
+
+    public boolean isRatingDisplayed() {
+        wait.until(ExpectedConditions.visibilityOf(rating));
+        return rating.isDisplayed();
+    }
+
+    public boolean isReviewCountCorrect(String expectedCount) {
+        wait.until(ExpectedConditions.visibilityOf(customerReviewsCount));
+        return customerReviewsCount.getText().contains(expectedCount);
+    }
+
+    // Method to navigate to the detail page of the first result
+    public ProductDetailPage goToFirstResultDetailPage() {
+        firstResultTitle.click();
+        return new ProductDetailPage(driver);
+    }
 }
